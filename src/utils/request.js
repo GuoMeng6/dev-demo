@@ -18,14 +18,15 @@ function checkStatus(response) {
  * @param  {object} [options] header,body,params,
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(methods, url, options = {}) {
+export default function request(methods, url, header = {}, options = {}) {
   return axios({
     methods,
     url,
-    // headers: {
-    //   'Ocp-Apim-Trace': true,
-    //   'Content-type': 'application/x-www-form-urlencoded',
-    // },
+    headers: {
+      'Authorization': header.token,
+      'Ocp-Apim-Trace': true,
+      'Content-type': header.type || 'application/x-www-form-urlencoded',
+    },
     ...options,
   })
     .then(checkStatus)

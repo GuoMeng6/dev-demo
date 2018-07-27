@@ -26,15 +26,15 @@ export default class Products extends Component {
 
   getDeskStatus(token) {
     G.request('get', 'desk/deskStatusInfos', {
-      params: {
-        deskId: 'a776ba3b-b342-4913-a0ba-51a632d69689',
-      },
-      headers: {
-        Authorization: token,
-        'Ocp-Apim-Trace': true,
-        'Content-type': 'application/x-www-form-urlencoded',
-      },
-    });
+      'token': token
+    }, {
+        params: {
+          deskId: 'a776ba3b-b342-4913-a0ba-51a632d69689',
+        },
+        data: {
+
+        }
+      });
   }
 
   render() {
