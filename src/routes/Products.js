@@ -14,9 +14,30 @@ export default class Products extends Component {
     });
   }
 
-  render() {
-    console.log('======= G ======== ', G);
+  componentDidMount() {
+    this.getSource();
+  }
 
+  getSource() {
+    G.request('get', 'reservation/getSource').then(res => {
+      this.getDeskStatus(res.data);
+    });
+  }
+
+  getDeskStatus(token) {
+    G.request('get', 'desk/deskStatusInfos', {
+      params: {
+        deskId: 'a776ba3b-b342-4913-a0ba-51a632d69689',
+      },
+      headers: {
+        Authorization: token,
+        'Ocp-Apim-Trace': true,
+        'Content-type': 'application/x-www-form-urlencoded',
+      },
+    });
+  }
+
+  render() {
     const { products } = this.props;
     return (
       <div>
